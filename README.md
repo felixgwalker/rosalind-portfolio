@@ -50,6 +50,7 @@ Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it i
 | FIBD | Mortal Fibonacci Rabbits | [fibd.py](bioinformatics-stronghold/fibd.py) | Solved |
 | GRPH | Overlap Graphs | [grph.py](bioinformatics-stronghold/grph.py) | Solved |
 | IEV | Calculating Expected Offspring | [iev.py](bioinformatics-stronghold/iev.py) | Solved |
+| LCSM | Finding a Shared Motif | [lcsm.py](bioinformatics-stronghold/lcsm.py) | Solved |
 | LIA | Independent Alleles | [lia.py](bioinformatics-stronghold/lia.py) | Solved |
 | MPRT | Finding a Protein Motif | [mprt.py](bioinformatics-stronghold/mprt.py) | Solved (needs internet) |
 | MRNA | Inferring mRNA from Protein | [mrna.py](bioinformatics-stronghold/mrna.py) | Solved |
@@ -74,6 +75,7 @@ Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it i
 | KMP | Speeding Up Motif Finding | [kmp.py](bioinformatics-stronghold/kmp.py) | Solved |
 | LCSQ | Finding a Shared Spliced Motif | [lcsq.py](bioinformatics-stronghold/lcsq.py) | Solved |
 | LEXF | Enumerating k-mers Lexicographically | [lexf.py](bioinformatics-stronghold/lexf.py) | Solved |
+| LEXV | Ordering Strings of Varying Length Lexicographically | [lexv.py](bioinformatics-stronghold/lexv.py) | Solved |
 | MMCH | Maximum Matchings and RNA Secondary Structures | [mmch.py](bioinformatics-stronghold/mmch.py) | Solved |
 | PDST | Creating a Distance Matrix | [pdst.py](bioinformatics-stronghold/pdst.py) | Solved |
 | REAR | Reversal Distance | [rear.py](bioinformatics-stronghold/rear.py) | Solved |
