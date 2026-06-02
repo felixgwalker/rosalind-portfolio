@@ -7,10 +7,10 @@ Solutions to all problems on [rosalind.info](https://rosalind.info), written in 
 ```
 rosalind-portfolio/
 ├── python-village/             # Introductory Python problems (INI1–INI6)
-├── bioinformatics-stronghold/  # Core bioinformatics algorithms (~90 problems)
-├── algorithmic-heights/        # Classical algorithms: graphs, sorting, DP
-├── textbook-track/             # Compeau & Pevzner textbook BA1A–BA10J (~100 problems)
-├── armory/                     # Bioinformatics databases & tools
+├── bioinformatics-stronghold/  # Core bioinformatics algorithms (105 problems)
+├── algorithmic-heights/        # Classical algorithms: graphs, sorting, DP (34 problems)
+├── bioinformatics-textbook-track/             # Compeau & Pevzner textbook BA1A–BA11J (124 problems)
+├── bioinformatics-armory/      # Bioinformatics databases & tools
 └── rosalind-files/             # Downloaded dataset files (rosalind_<id>.txt)
 ```
 
@@ -108,8 +108,6 @@ Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it i
 | PRSM | Matching a Spectrum to a Protein | [prsm.py](bioinformatics-stronghold/prsm.py) | Solved |
 | SGRA | Using the Spectrum Graph to Infer Peptides | [sgra.py](bioinformatics-stronghold/sgra.py) | Solved |
 | SUFF | Encoding Suffix Trees | [suff.py](bioinformatics-stronghold/suff.py) | Solved |
-| BPHR | Base Quality Distribution | [bphr.py](bioinformatics-stronghold/bphr.py) | Solved |
-| CLUS | Global Multiple Alignment | [clus.py](bioinformatics-stronghold/clus.py) | Solved |
 | EBIN | Wright-Fisher's Model of Genetic Drift | [ebin.py](bioinformatics-stronghold/ebin.py) | Solved |
 | FOUN | The Founder Effect and Genetic Drift | [foun.py](bioinformatics-stronghold/foun.py) | Solved |
 | GAFF | Global Alignment with Affine Gap Penalty | [gaff.py](bioinformatics-stronghold/gaff.py) | Solved |
@@ -123,9 +121,27 @@ Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it i
 | CSET | Fixing an Inconsistent Character Set | [cset.py](bioinformatics-stronghold/cset.py) | Solved |
 | GASM | Genome Assembly Using Reads | [gasm.py](bioinformatics-stronghold/gasm.py) | Solved |
 | GCON | Global Alignment with Constant Gap Penalty | [gcon.py](bioinformatics-stronghold/gcon.py) | Solved |
-| LCON | Local Alignment with Constant Gap Penalty | [lcon.py](bioinformatics-stronghold/lcon.py) | Solved |
-| PTRA | Protein Translation | [ptra.py](bioinformatics-stronghold/ptra.py) | Solved |
-| RDAG | Searching a Graph with a Sink | [rdag.py](bioinformatics-stronghold/rdag.py) | Solved |
+| MULT | Multiple Alignment | [mult.py](bioinformatics-stronghold/mult.py) | Solved |
+| CUNR | Counting Unrooted Binary Trees | [cunr.py](bioinformatics-stronghold/cunr.py) | Solved |
+| PDPL | Creating a Distance Matrix from Restriction Maps | [pdpl.py](bioinformatics-stronghold/pdpl.py) | Solved |
+| MREP | Finding the Longest Multiple Repeat | [mrep.py](bioinformatics-stronghold/mrep.py) | Solved |
+| EUBT | Enumerating Unrooted Binary Trees | [eubt.py](bioinformatics-stronghold/eubt.py) | Solved |
+| MEND | Inferring Genotype from a Pedigree | [mend.py](bioinformatics-stronghold/mend.py) | Solved |
+| CHBP | Character-Based Phylogeny | [chbp.py](bioinformatics-stronghold/chbp.py) | Solved |
+| QRT | Quartets | [qrt.py](bioinformatics-stronghold/qrt.py) | Solved |
+| CTEA | Counting Topological Orderings of Evolutionary Ancestors | [ctea.py](bioinformatics-stronghold/ctea.py) | Solved |
+| ALPH | Alignment-Based Phylogeny | [alph.py](bioinformatics-stronghold/alph.py) | Solved |
+| MGAP | Maximizing the Gap Symbols of an Optimal Alignment | [mgap.py](bioinformatics-stronghold/mgap.py) | Solved |
+| OSYM | Counting Palindromic Substrings | [osym.py](bioinformatics-stronghold/osym.py) | Solved |
+| ROOT | Counting Rooted Binary Trees | [root.py](bioinformatics-stronghold/root.py) | Solved |
+| SPTD | Phylogeny Comparison with Split Distance | [sptd.py](bioinformatics-stronghold/sptd.py) | Solved |
+| SMGB | Semiglobal Alignment | [smgb.py](bioinformatics-stronghold/smgb.py) | Solved |
+| CNTQ | Counting Quartets | [cntq.py](bioinformatics-stronghold/cntq.py) | Solved |
+| QRTD | Quartet Distance | [qrtd.py](bioinformatics-stronghold/qrtd.py) | Solved |
+| GREP | Genome Assembly with Perfect Coverage Revisited | [grep.py](bioinformatics-stronghold/grep.py) | Solved |
+| SIMS | Finding a Motif with Modifications | [sims.py](bioinformatics-stronghold/sims.py) | Solved |
+| RSUB | Identifying Reversing Substitutions | [rsub.py](bioinformatics-stronghold/rsub.py) | Solved |
+| KSIM | Finding All Similar Motifs | [ksim.py](bioinformatics-stronghold/ksim.py) | Solved |
 
 ---
 
@@ -133,32 +149,40 @@ Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it i
 
 | ID | Problem | File | Status |
 |----|---------|------|--------|
+| FIBO | Fibonacci Numbers | [fibo.py](algorithmic-heights/fibo.py) | Solved |
 | BINS | Binary Search | [bins.py](algorithmic-heights/bins.py) | Solved |
-| DDEG | Double-Degree Array | [ddeg.py](algorithmic-heights/ddeg.py) | Solved |
 | DEG | Degree Array | [deg.py](algorithmic-heights/deg.py) | Solved |
-| HDAG | Hamiltonian Path in DAG | [hdag.py](algorithmic-heights/hdag.py) | Solved |
 | INS | Insertion Sort | [ins.py](algorithmic-heights/ins.py) | Solved |
-| PAR | 2-Way Partition | [par.py](algorithmic-heights/par.py) | Solved |
-| PAR3 | 3-Way Partition | [par3.py](algorithmic-heights/par3.py) | Solved |
+| MAJ | Majority Element | [maj.py](algorithmic-heights/maj.py) | Solved |
 | 2SUM | 2-Sum Problem | [2sum.py](algorithmic-heights/2sum.py) | Solved |
+| MS | Merge Sort | [ms.py](algorithmic-heights/ms.py) | Solved |
+| MED | Weighted Median | [med.py](algorithmic-heights/med.py) | Solved |
+| DDEG | Double-Degree Array | [ddeg.py](algorithmic-heights/ddeg.py) | Solved |
+| MER | Merging Two Sorted Arrays | [mer.py](algorithmic-heights/mer.py) | Solved |
 | BFS | Breadth-First Search | [bfs.py](algorithmic-heights/bfs.py) | Solved |
 | CC | Connected Components | [cc.py](algorithmic-heights/cc.py) | Solved |
-| DIJ | Dijkstra's Algorithm | [dij.py](algorithmic-heights/dij.py) | Solved |
-| HS | Heap Sort | [hs.py](algorithmic-heights/hs.py) | Solved |
-| MED | Weighted Median | [med.py](algorithmic-heights/med.py) | Solved |
-| MIS | Maximal Independent Set | [mis.py](algorithmic-heights/mis.py) | Solved |
-| MS | Merge Sort | [ms.py](algorithmic-heights/ms.py) | Solved |
-| QS | Quick Sort | [qs.py](algorithmic-heights/qs.py) | Solved |
-| SQ | Square in a Graph | [sq.py](algorithmic-heights/sq.py) | Solved |
-| SDAG | Shortest Paths in DAG | [sdag.py](algorithmic-heights/sdag.py) | Solved |
-| 3SUM | 3-Sum Problem | [3sum.py](algorithmic-heights/3sum.py) | Solved |
-| BFSP | Bellman-Ford Shortest Paths | [bfsp.py](algorithmic-heights/bfsp.py) | Solved |
-| DAG | Testing Acyclicity | [dag.py](algorithmic-heights/dag.py) | Solved |
-| GS | General Sink | [gs.py](algorithmic-heights/gs.py) | Solved |
 | HEA | Building a Heap | [hea.py](algorithmic-heights/hea.py) | Solved |
-| SC | Semi-Connected Graph | [sc.py](algorithmic-heights/sc.py) | Solved |
+| PAR | 2-Way Partition | [par.py](algorithmic-heights/par.py) | Solved |
+| 3SUM | 3-Sum Problem | [3sum.py](algorithmic-heights/3sum.py) | Solved |
+| DIJ | Dijkstra's Algorithm | [dij.py](algorithmic-heights/dij.py) | Solved |
+| BIP | Testing Bipartiteness | [bip.py](algorithmic-heights/bip.py) | Solved |
+| DAG | Testing Acyclicity | [dag.py](algorithmic-heights/dag.py) | Solved |
+| SQ | Square in a Graph | [sq.py](algorithmic-heights/sq.py) | Solved |
+| HS | Heap Sort | [hs.py](algorithmic-heights/hs.py) | Solved |
+| INV | Counting Inversions | [inv.py](algorithmic-heights/inv.py) | Solved |
+| PAR3 | 3-Way Partition | [par3.py](algorithmic-heights/par3.py) | Solved |
 | TS | Topological Sorting | [ts.py](algorithmic-heights/ts.py) | Solved |
-| LONG | Longest Path in a DAG | [long.py](algorithmic-heights/long.py) | Solved |
+| BF | Bellman-Ford Algorithm | [bf.py](algorithmic-heights/bf.py) | Solved |
+| CTE | Shortest Cycle Through a Given Edge | [cte.py](algorithmic-heights/cte.py) | Solved |
+| PS | Partial Sort | [ps.py](algorithmic-heights/ps.py) | Solved |
+| NWC | Negative Weight Cycle | [nwc.py](algorithmic-heights/nwc.py) | Solved |
+| QS | Quick Sort | [qs.py](algorithmic-heights/qs.py) | Solved |
+| HDAG | Hamiltonian Path in DAG | [hdag.py](algorithmic-heights/hdag.py) | Solved |
+| SCC | Strongly Connected Components | [scc.py](algorithmic-heights/scc.py) | Solved |
+| SDAG | Shortest Paths in DAG | [sdag.py](algorithmic-heights/sdag.py) | Solved |
+| 2SAT | 2-Satisfiability | [2sat.py](algorithmic-heights/2sat.py) | Solved |
+| GS | General Sink | [gs.py](algorithmic-heights/gs.py) | Solved |
+| SC | Semi-Connected Graph | [sc.py](algorithmic-heights/sc.py) | Solved |
 
 ---
 
@@ -170,85 +194,91 @@ Problems from *Bioinformatics Algorithms* (Compeau & Pevzner).
 
 | ID | Problem | File |
 |----|---------|------|
-| BA1A | Count occurrences of a pattern | [ba1a.py](textbook-track/ba1a.py) |
-| BA1B | Most frequent k-mers | [ba1b.py](textbook-track/ba1b.py) |
-| BA1C | Reverse complement | [ba1c.py](textbook-track/ba1c.py) |
-| BA1D | All occurrences of a pattern | [ba1d.py](textbook-track/ba1d.py) |
-| BA1E | Patterns forming clumps | [ba1e.py](textbook-track/ba1e.py) |
-| BA1F | Position minimising skew | [ba1f.py](textbook-track/ba1f.py) |
-| BA1G | Hamming distance | [ba1g.py](textbook-track/ba1g.py) |
-| BA1H | Approximate pattern occurrences | [ba1h.py](textbook-track/ba1h.py) |
-| BA1I | Frequent words with mismatches | [ba1i.py](textbook-track/ba1i.py) |
-| BA1J | Frequent words with mismatches + rev comp | [ba1j.py](textbook-track/ba1j.py) |
-| BA1K | Frequency array | [ba1k.py](textbook-track/ba1k.py) |
-| BA1L | PatternToNumber | [ba1l.py](textbook-track/ba1l.py) |
-| BA1M | NumberToPattern | [ba1m.py](textbook-track/ba1m.py) |
-| BA1N | d-Neighborhood | [ba1n.py](textbook-track/ba1n.py) |
+| BA1A | Count occurrences of a pattern | [ba1a.py](bioinformatics-textbook-track/ba1a.py) |
+| BA1B | Most frequent k-mers | [ba1b.py](bioinformatics-textbook-track/ba1b.py) |
+| BA1C | Reverse complement | [ba1c.py](bioinformatics-textbook-track/ba1c.py) |
+| BA1D | All occurrences of a pattern | [ba1d.py](bioinformatics-textbook-track/ba1d.py) |
+| BA1E | Patterns forming clumps | [ba1e.py](bioinformatics-textbook-track/ba1e.py) |
+| BA1F | Position minimising skew | [ba1f.py](bioinformatics-textbook-track/ba1f.py) |
+| BA1G | Hamming distance | [ba1g.py](bioinformatics-textbook-track/ba1g.py) |
+| BA1H | Approximate pattern occurrences | [ba1h.py](bioinformatics-textbook-track/ba1h.py) |
+| BA1I | Frequent words with mismatches | [ba1i.py](bioinformatics-textbook-track/ba1i.py) |
+| BA1J | Frequent words with mismatches + rev comp | [ba1j.py](bioinformatics-textbook-track/ba1j.py) |
+| BA1K | Frequency array | [ba1k.py](bioinformatics-textbook-track/ba1k.py) |
+| BA1L | PatternToNumber | [ba1l.py](bioinformatics-textbook-track/ba1l.py) |
+| BA1M | NumberToPattern | [ba1m.py](bioinformatics-textbook-track/ba1m.py) |
+| BA1N | d-Neighborhood | [ba1n.py](bioinformatics-textbook-track/ba1n.py) |
 
 ### Chapter 2 — Molecular Clocks
 
 | ID | Problem | File |
 |----|---------|------|
-| BA2A | Motif Enumeration | [ba2a.py](textbook-track/ba2a.py) |
-| BA2B | Median String | [ba2b.py](textbook-track/ba2b.py) |
-| BA2C | Profile-most probable k-mer | [ba2c.py](textbook-track/ba2c.py) |
-| BA2D | GreedyMotifSearch | [ba2d.py](textbook-track/ba2d.py) |
-| BA2E | GreedyMotifSearch with pseudocounts | [ba2e.py](textbook-track/ba2e.py) |
-| BA2F | RandomizedMotifSearch | [ba2f.py](textbook-track/ba2f.py) |
-| BA2G | GibbsSampler | [ba2g.py](textbook-track/ba2g.py) |
-| BA2H | Distance between pattern and strings | [ba2h.py](textbook-track/ba2h.py) |
+| BA2A | Motif Enumeration | [ba2a.py](bioinformatics-textbook-track/ba2a.py) |
+| BA2B | Median String | [ba2b.py](bioinformatics-textbook-track/ba2b.py) |
+| BA2C | Profile-most probable k-mer | [ba2c.py](bioinformatics-textbook-track/ba2c.py) |
+| BA2D | GreedyMotifSearch | [ba2d.py](bioinformatics-textbook-track/ba2d.py) |
+| BA2E | GreedyMotifSearch with pseudocounts | [ba2e.py](bioinformatics-textbook-track/ba2e.py) |
+| BA2F | RandomizedMotifSearch | [ba2f.py](bioinformatics-textbook-track/ba2f.py) |
+| BA2G | GibbsSampler | [ba2g.py](bioinformatics-textbook-track/ba2g.py) |
+| BA2H | Distance between pattern and strings | [ba2h.py](bioinformatics-textbook-track/ba2h.py) |
 
 ### Chapter 3 — Genome Assembly
 
 | ID | Problem | File |
 |----|---------|------|
-| BA3A–BA3L | k-mer composition through gapped path reconstruction | [ba3a.py](textbook-track/ba3a.py) … [ba3l.py](textbook-track/ba3l.py) |
+| BA3A–BA3M | k-mer composition through maximal non-branching paths | [ba3a.py](bioinformatics-textbook-track/ba3a.py) … [ba3m.py](bioinformatics-textbook-track/ba3m.py) |
 
 ### Chapter 4 — Antibiotic Sequencing
 
 | ID | Problem | File |
 |----|---------|------|
-| BA4A–BA4I | RNA translation through convolution sequencing | [ba4a.py](textbook-track/ba4a.py) … [ba4i.py](textbook-track/ba4i.py) |
+| BA4A–BA4M | RNA translation through Turnpike problem | [ba4a.py](bioinformatics-textbook-track/ba4a.py) … [ba4m.py](bioinformatics-textbook-track/ba4m.py) |
 
 ### Chapter 5 — Sequence Alignment
 
 | ID | Problem | File |
 |----|---------|------|
-| BA5A–BA5N | Coins through multiple alignment | [ba5a.py](textbook-track/ba5a.py) … [ba5n.py](textbook-track/ba5n.py) |
+| BA5A–BA5N | Coins through multiple alignment | [ba5a.py](bioinformatics-textbook-track/ba5a.py) … [ba5n.py](bioinformatics-textbook-track/ba5n.py) |
 
 ### Chapter 6 — Genome Rearrangements
 
 | ID | Problem | File |
 |----|---------|------|
-| BA6A–BA6J | GreedySorting through 2-BreakOnGenomeGraph | [ba6a.py](textbook-track/ba6a.py) … [ba6j.py](textbook-track/ba6j.py) |
+| BA6A–BA6K | GreedySorting through 2-BreakOnGenome | [ba6a.py](bioinformatics-textbook-track/ba6a.py) … [ba6k.py](bioinformatics-textbook-track/ba6k.py) |
 
-### Chapters 7–10 — Phylogenetics, Clustering, Suffix Structures, HMMs
+### Chapters 7–11 — Phylogenetics, Clustering, Suffix Structures, HMMs, Proteomics
 
 | Range | Topics | Files |
 |-------|--------|-------|
-| BA7A–BA7G | Phylogenetics (UPGMA, NJ, parsimony) | [ba7a.py](textbook-track/ba7a.py) … [ba7g.py](textbook-track/ba7g.py) |
-| BA8A–BA8E | Clustering (k-means, hierarchical) | [ba8a.py](textbook-track/ba8a.py) … [ba8e.py](textbook-track/ba8e.py) |
-| BA9A–BA9O | Suffix trees, BWT, pattern matching | [ba9a.py](textbook-track/ba9a.py) … [ba9o.py](textbook-track/ba9o.py) |
-| BA10A–BA10J | HMMs, Viterbi, Baum-Welch | [ba10a.py](textbook-track/ba10a.py) … [ba10j.py](textbook-track/ba10j.py) |
+| BA7A–BA7G | Phylogenetics (UPGMA, NJ, parsimony) | [ba7a.py](bioinformatics-textbook-track/ba7a.py) … [ba7g.py](bioinformatics-textbook-track/ba7g.py) |
+| BA8A–BA8E | Clustering (k-means, hierarchical) | [ba8a.py](bioinformatics-textbook-track/ba8a.py) … [ba8e.py](bioinformatics-textbook-track/ba8e.py) |
+| BA9A–BA9R | Suffix trees, BWT, pattern matching, partial suffix array | [ba9a.py](bioinformatics-textbook-track/ba9a.py) … [ba9r.py](bioinformatics-textbook-track/ba9r.py) |
+| BA10A–BA10K | HMMs, Viterbi, Baum-Welch, forward-backward | [ba10a.py](bioinformatics-textbook-track/ba10a.py) … [ba10k.py](bioinformatics-textbook-track/ba10k.py) |
+| BA11A–BA11J | De novo sequencing, peptide vectors, PSM search, spectral dictionaries | [ba11a.py](bioinformatics-textbook-track/ba11a.py) … [ba11j.py](bioinformatics-textbook-track/ba11j.py) |
 
 ---
 
 ## Bioinformatics Armory
 
-> Problems marked *(needs web)* make HTTP requests to NCBI, UniProt, or PDB.
+> Problems marked *(needs web)* make HTTP requests to NCBI or UniProt.
 
 | ID | Problem | File | Status |
 |----|---------|------|--------|
-| INI | Introduction to the Armory | [ini.py](armory/ini.py) | Solved |
-| GBK | GenBank Introduction | [gbk.py](armory/gbk.py) | Solved *(needs web)* |
-| FRMT | Data Formats | [frmt.py](armory/frmt.py) | Solved *(needs web)* |
-| MULT | Pairwise Global Alignment | [mult.py](armory/mult.py) | Solved |
-| PDBT | PDB Introduction | [pdbt.py](armory/pdbt.py) | Solved *(needs web)* |
-| GREP | Searching Datasets Globally | [grep.py](armory/grep.py) | Solved *(needs web)* |
-| BFIL | Base Filtration by Quality | [bfil.py](armory/bfil.py) | Solved |
-| OLIS | Online Bioinformatics Resources | [olis.py](armory/olis.py) | Solved *(needs web)* |
-| DNAS | Identifying DNA Strings | [dnas.py](armory/dnas.py) | Solved *(needs web)* |
-| ORI | Finding an Origin of Replication | [ori.py](armory/ori.py) | Solved |
+| INI | Introduction to the Armory | [ini.py](bioinformatics-armory/ini.py) | Solved |
+| GBK | GenBank Introduction | [gbk.py](bioinformatics-armory/gbk.py) | Solved *(needs web)* |
+| MEME | New Motif Discovery | [meme.py](bioinformatics-armory/meme.py) | Solved |
+| FRMT | Data Formats | [frmt.py](bioinformatics-armory/frmt.py) | Solved *(needs web)* |
+| NEED | Pairwise Global Alignment | [need.py](bioinformatics-armory/need.py) | Solved |
+| TFSQ | Transforming FASTQ to FASTA | [tfsq.py](bioinformatics-armory/tfsq.py) | Solved |
+| PTRA | Protein Translation | [ptra.py](bioinformatics-armory/ptra.py) | Solved |
+| SUBO | Suboptimal Local Alignment | [subo.py](bioinformatics-armory/subo.py) | Solved |
+| PHRE | Phred Quality Scores | [phre.py](bioinformatics-armory/phre.py) | Solved |
+| RVCO | Complementing a Strand of DNA | [rvco.py](bioinformatics-armory/rvco.py) | Solved |
+| FILT | Read Quality Distribution | [filt.py](bioinformatics-armory/filt.py) | Solved |
+| ORFR | Finding Genes with ORFs | [orfr.py](bioinformatics-armory/orfr.py) | Solved |
+| CLUS | Global Multiple Alignment | [clus.py](bioinformatics-armory/clus.py) | Solved |
+| BPHR | Base Quality Distribution | [bphr.py](bioinformatics-armory/bphr.py) | Solved |
+| BFIL | Base Filtration by Quality | [bfil.py](bioinformatics-armory/bfil.py) | Solved |
 
 ---
 
