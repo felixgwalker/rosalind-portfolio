@@ -9,8 +9,10 @@ import os, sys
 from collections import defaultdict
 
 def get_input():
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-files', 'rosalind_ba10f.txt')
-    return (open(p).read() if os.path.exists(p) else sys.stdin.read()).strip()
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-inputs', 'bioinformatics-textbook-track', 'rosalind_ba10f.txt')
+    if os.path.exists(p):
+        return open(p).read().strip(), p.replace('rosalind-inputs', 'rosalind-outputs')
+    return sys.stdin.read().strip(), None
 
 def build_profile_hmm(alignment, theta, sigma, alphabet):
     n_rows = len(alignment)
@@ -75,4 +77,15 @@ def solve(data):
     if alignment:
         build_profile_hmm(alignment, theta, sigma, alphabet)
 
-if __name__ == '__main__': solve(get_input())
+if __name__ == '__main__':
+    import io, contextlib
+    data, out_path = get_input()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        solve(data)
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if out_path:
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)

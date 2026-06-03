@@ -17,12 +17,23 @@ def lexv(alphabet, n):
 
 
 def main():
-    path = 'rosalind-files/rosalind_lexv.txt'
-    text = open(path).read() if os.path.exists(path) else sys.stdin.read()
+    import io, contextlib
+    path = 'rosalind-inputs/bioinformatics-stronghold/rosalind_lexv.txt'
+    use_file = os.path.exists(path)
+    text = open(path).read() if use_file else sys.stdin.read()
     lines = text.strip().splitlines()
     alphabet = lines[0].split()
     n = int(lines[1])
-    print('\n'.join(lexv(alphabet, n)))
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        print('\n'.join(lexv(alphabet, n)))
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if use_file:
+        out_path = 'rosalind-outputs/bioinformatics-stronghold/rosalind_lexv.txt'
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)
 
 
 if __name__ == '__main__':

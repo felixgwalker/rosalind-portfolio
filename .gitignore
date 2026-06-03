@@ -1,1 +1,2 @@
-rosalind-files/*.txt
+rosalind-inputs/*/*.txt
+rosalind-outputs/*/*.txt

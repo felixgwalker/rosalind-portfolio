@@ -12,11 +12,11 @@ import sys
 
 def get_input():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                        '..', 'rosalind-files', 'rosalind_par.txt')
+                        '..', 'rosalind-inputs', 'algorithmic-heights', 'rosalind_par.txt')
     if os.path.exists(path):
         with open(path) as f:
-            return f.read().strip()
-    return sys.stdin.read().strip()
+            return f.read().strip(), path.replace('rosalind-inputs', 'rosalind-outputs')
+    return sys.stdin.read().strip(), None
 
 def partition(arr):
     """In-place Lomuto partition using last element as pivot. Returns the array."""
@@ -35,4 +35,14 @@ def solve(data):
     print(' '.join(map(str, partition(arr))))
 
 if __name__ == '__main__':
-    solve(get_input())
+    import io, contextlib
+    data, out_path = get_input()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        solve(data)
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if out_path:
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)

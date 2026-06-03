@@ -11,12 +11,17 @@ rosalind-portfolio/
 ├── algorithmic-heights/        # Classical algorithms: graphs, sorting, DP (34 problems)
 ├── bioinformatics-textbook-track/             # Compeau & Pevzner textbook BA1A–BA11J (124 problems)
 ├── bioinformatics-armory/      # Bioinformatics databases & tools
-└── rosalind-files/             # Downloaded dataset files (rosalind_<id>.txt)
+├── rosalind-inputs/            # Downloaded dataset files, split by track — gitignored
+│   ├── bioinformatics-stronghold/
+│   ├── algorithmic-heights/
+│   ├── bioinformatics-textbook-track/
+│   └── bioinformatics-armory/
+└── rosalind-outputs/           # Generated answers, same layout — gitignored
 ```
 
-### Input convention
+### Input / output convention
 
-Every solution checks for `rosalind-files/rosalind_<id>.txt` and reads from it if present; otherwise it reads from `stdin`. Drop your downloaded dataset file into `rosalind-files/` and run the script directly, or pipe input from the terminal.
+Every solution checks for `rosalind-inputs/<track>/rosalind_<id>.txt` and reads from it if present; otherwise it falls back to `stdin`. Drop your downloaded dataset file into the matching track subdirectory and run the script directly — the answer is printed to the terminal **and** written to `rosalind-outputs/<track>/rosalind_<id>.txt` for easy access when output is long. Python Village problems (`ini*.py`) read from `stdin` only.
 
 ---
 
@@ -286,5 +291,5 @@ Problems from *Bioinformatics Algorithms* (Compeau & Pevzner).
 
 - **No bioinformatics libraries.** Every algorithm — from Needleman-Wunsch to Burrows-Wheeler, from UPGMA to Hierholzer's Eulerian circuit — is implemented from first principles using Python's standard library only.
 - **Self-contained files.** Each solution is a standalone `.py` file with a header describing the problem, algorithm, and I/O format. Large constants (BLOSUM62, PAM250) are defined inline.
-- **Dual input mode.** Drop `rosalind_<id>.txt` into `rosalind-files/` to run without typing; or pipe from stdin for generic use.
+- **Dual input mode.** Drop `rosalind_<id>.txt` into `rosalind-inputs/<track>/` to run without typing; or pipe from stdin for generic use. Answers are automatically saved to `rosalind-outputs/<track>/` when running from a file.
 - **Descriptive comments.** Non-obvious algorithmic steps are annotated inline; straightforward code is left uncommented.

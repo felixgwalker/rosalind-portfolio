@@ -7,8 +7,10 @@
 import os, sys
 
 def get_input():
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-files', 'rosalind_ba5l.txt')
-    return (open(p).read() if os.path.exists(p) else sys.stdin.read()).strip()
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-inputs', 'bioinformatics-textbook-track', 'rosalind_ba5l.txt')
+    if os.path.exists(p):
+        return open(p).read().strip(), p.replace('rosalind-inputs', 'rosalind-outputs')
+    return sys.stdin.read().strip(), None
 
 BLOSUM62_STR="""   A  R  N  D  C  Q  E  G  H  I  L  K  M  F  P  S  T  W  Y  V
 A  4 -1 -2 -2  0 -1 -1  0 -2 -1 -1 -1 -1 -2 -1  1  0 -3 -2  0
@@ -62,4 +64,15 @@ def solve(data):
     score,as_,at_=global_align(s,t)
     print(score); print(as_); print(at_)
 
-if __name__ == '__main__': solve(get_input())
+if __name__ == '__main__':
+    import io, contextlib
+    data, out_path = get_input()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        solve(data)
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if out_path:
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)

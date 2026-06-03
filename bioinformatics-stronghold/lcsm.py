@@ -38,9 +38,20 @@ def lcsm(seqs):
 
 
 def main():
-    path = 'rosalind-files/rosalind_lcsm.txt'
-    text = open(path).read() if os.path.exists(path) else sys.stdin.read()
-    print(lcsm(parse_fasta(text)))
+    import io, contextlib
+    path = 'rosalind-inputs/bioinformatics-stronghold/rosalind_lcsm.txt'
+    use_file = os.path.exists(path)
+    text = open(path).read() if use_file else sys.stdin.read()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        print(lcsm(parse_fasta(text)))
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if use_file:
+        out_path = 'rosalind-outputs/bioinformatics-stronghold/rosalind_lcsm.txt'
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)
 
 
 if __name__ == '__main__':

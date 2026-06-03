@@ -8,8 +8,10 @@ import os, sys
 from collections import defaultdict
 
 def get_input():
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-files', 'rosalind_ba3e.txt')
-    return (open(p).read() if os.path.exists(p) else sys.stdin.read()).strip()
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'rosalind-inputs', 'bioinformatics-textbook-track', 'rosalind_ba3e.txt')
+    if os.path.exists(p):
+        return open(p).read().strip(), p.replace('rosalind-inputs', 'rosalind-outputs')
+    return sys.stdin.read().strip(), None
 
 def solve(data):
     kmers = [l.strip() for l in data.splitlines() if l.strip()]
@@ -19,4 +21,15 @@ def solve(data):
     for node in sorted(adj):
         print(f"{node} -> {','.join(adj[node])}")
 
-if __name__ == '__main__': solve(get_input())
+if __name__ == '__main__':
+    import io, contextlib
+    data, out_path = get_input()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        solve(data)
+    output = buf.getvalue()
+    sys.stdout.write(output)
+    if out_path:
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, 'w') as f:
+            f.write(output)
