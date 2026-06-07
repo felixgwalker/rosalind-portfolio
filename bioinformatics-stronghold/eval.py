@@ -13,7 +13,6 @@
 
 import os
 import sys
-import math
 
 def get_input():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -33,13 +32,12 @@ def solve(data):
 
     results = []
     for x in gc_values:
-        log_p = 0.0
+        p_s = 1.0
         for base in s:
             if base in 'GC':
-                log_p += math.log(x / 2)
+                p_s *= x / 2
             else:
-                log_p += math.log((1 - x) / 2)
-        p_s = math.exp(log_p)
+                p_s *= (1 - x) / 2
         expected = positions * p_s
         results.append(round(expected, 6))
 

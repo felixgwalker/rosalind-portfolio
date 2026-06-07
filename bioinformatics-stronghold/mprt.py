@@ -26,7 +26,9 @@ def get_input():
 
 def fetch_sequence(uniprot_id):
     """Download FASTA from UniProt and return the amino acid sequence."""
-    base_id = uniprot_id.split('-')[0]    # strip isoform suffix e.g. P07814-1
+    # Rosalind IDs may be "ACCESSION" or "ACCESSION_ENTRYNAME" (e.g. P22457_FA7_BOVIN);
+    # strip the entry-name suffix and any isoform suffix (e.g. P07814-1) to get the accession.
+    base_id = uniprot_id.split('_')[0].split('-')[0]
     url = f"https://www.uniprot.org/uniprot/{base_id}.fasta"
     with urllib.request.urlopen(url) as resp:
         fasta = resp.read().decode('utf-8')

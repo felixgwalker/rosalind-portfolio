@@ -86,8 +86,12 @@ def weighted_bfs(adj, start, end):
                 queue.append((neighbour, new_dist))
     return -1.0
 
+def format_distance(d):
+    return str(int(d)) if d == int(d) else str(d)
+
 def solve(data):
     blocks = data.strip().split('\n\n')
+    distances = []
     for block in blocks:
         lines = block.strip().splitlines()
         if not lines:
@@ -96,7 +100,8 @@ def solve(data):
         leaf_pair = lines[1].strip().split()
         leaf1, leaf2 = leaf_pair[0], leaf_pair[1]
         adj = parse_newick_weighted(newick)
-        print(weighted_bfs(adj, leaf1, leaf2))
+        distances.append(weighted_bfs(adj, leaf1, leaf2))
+    print(' '.join(format_distance(d) for d in distances))
 
 if __name__ == '__main__':
     import io, contextlib

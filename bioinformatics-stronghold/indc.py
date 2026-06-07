@@ -1,16 +1,15 @@
 # Independent Segregation of Chromosomes (INDC)
 # Rosalind problem: https://rosalind.info/problems/indc/
 #
-# Problem: Given a positive integer n (≤ 5), consider an organism with n pairs
-# of chromosomes. When it produces a gamete, each chromosome is independently
-# inherited from one of the two parents with probability 1/2.
+# Problem: Given a positive integer n (≤ 50) of chromosome pairs, two diploid
+# siblings each receive 2n chromosomes total (one homolog from each of the n
+# pairs from each parent). For each of these 2n parental chromosomes, both
+# siblings independently inherit one of two homologs, so they share it with
+# probability 1/2. Compute P(siblings share at least k of their 2n chromosomes)
+# for k = 1 to 2n. Output the 2n log₁₀ probabilities.
 #
-# For a child with parents carrying alleles (n chromosome pairs), compute
-# P(child inherits at least j of the n "special" chromosomes from one parent)
-# for j = 1 to n. Output the n log₁₀ probabilities.
-#
-# Model: X ~ Binomial(n, 1/2).
-# P(X ≥ j) = Σ_{k=j}^{n} C(n,k) * (1/2)^n
+# Model: M ~ Binomial(2n, 1/2).
+# P(M ≥ k) = Σ_{i=k}^{2n} C(2n, i) * (1/2)^(2n)
 
 import os
 import sys
@@ -27,10 +26,11 @@ def get_input():
 
 def solve(data):
     n = int(data.strip())
+    total = 2 * n
     results = []
-    # For j from 1 to n: P(X >= j) where X ~ Bin(n, 0.5)
-    for j in range(1, n + 1):
-        prob = sum(comb(n, k) for k in range(j, n + 1)) / (2 ** n)
+    # For k from 1 to 2n: P(M >= k) where M ~ Bin(2n, 0.5)
+    for k in range(1, total + 1):
+        prob = sum(comb(total, i) for i in range(k, total + 1)) / (2 ** total)
         results.append(round(log10(prob), 3))
     print(' '.join(map(str, results)))
 

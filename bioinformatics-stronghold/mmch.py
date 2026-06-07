@@ -22,8 +22,8 @@ def get_input():
                         '..', 'rosalind-inputs', 'bioinformatics-stronghold', 'rosalind_mmch.txt')
     if os.path.exists(path):
         with open(path) as f:
-            return f.read()
-    return sys.stdin.read()
+            return f.read(), path.replace('rosalind-inputs', 'rosalind-outputs')
+    return sys.stdin.read(), None
 
 def parse_fasta(text):
     parts = []

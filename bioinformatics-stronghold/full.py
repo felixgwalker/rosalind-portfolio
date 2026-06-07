@@ -2,18 +2,28 @@
 # Rosalind problem: https://rosalind.info/problems/full/
 #
 # Problem: Given a "full" mass spectrum (containing both prefix and suffix
-# masses as well as the total mass), reconstruct the peptide.
+# masses as well as the total/parent mass), reconstruct the peptide.
 #
 # The full spectrum of peptide a1..an contains:
-#   0, m1, m1+m2, ..., M  (prefix masses, M = total)
+#   0, m1, m1+m2, ..., M  (prefix masses, M = total/parent mass)
 #   0, m_n, m_n+m_{n-1}, ..., M  (suffix masses)
 # where mi = mass of residue i.
 #
-# Algorithm:
-#   1. The total mass M = max in the spectrum minus water (~18.01 Da for full protein).
-#      Actually: given prefix masses, the total peptide mass M appears in the spectrum.
-#   2. From the spectrum, identify pairs (w, M-w) to find prefix mass candidates.
-#   3. Build prefix masses in increasing order; consecutive differences give amino acids.
+# Input format: the first number L[0] is the parent mass M; the rest of the
+# numbers are the remaining (internal) prefix and suffix masses.
+#
+# Note: complement pairing alone (w, M-w both present) cannot distinguish
+# prefix masses from suffix masses, since the complete spectrum is symmetric
+# -- every internal prefix mass's complement is an internal suffix mass and
+# vice versa, so essentially *every* mass has a complement in the set.
+#
+# Algorithm (spectral graph):
+#   1. M = L[0]; build the node set S = {0, M} u (the rest of L).
+#   2. Connect u -> v (u < v) when v - u is close to some amino acid's mass;
+#      label the edge with that amino acid.
+#   3. The true prefix-mass chain is a path from 0 to M with exactly
+#      n = len(S)/2 edges (n = number of residues). Search for such a path
+#      and read off the edge labels to get the peptide.
 
 import os
 import sys
@@ -33,7 +43,7 @@ MONO_MASS = {
     'P': 97.05276,  'Q': 128.05858, 'R': 156.10111, 'S': 87.03203,
     'T': 101.04768, 'V': 99.06841,  'W': 186.07931, 'Y': 163.06333,
 }
-WATER = 18.01056   # mass of a water molecule added to a free peptide
+TOLERANCE = 0.02
 
 def closest_aa(diff):
     best_aa, best_dist = None, float('inf')
@@ -42,35 +52,47 @@ def closest_aa(diff):
         if d < best_dist:
             best_dist = d
             best_aa = aa
-    return best_aa if best_dist < 0.02 else None
+    return best_aa if best_dist < TOLERANCE else None
 
 def solve(data):
-    masses = sorted(float(x) for x in data.split())
+    nums = [float(x) for x in data.split()]
+    M = nums[0]               # parent mass
+    n = (len(nums) - 3) // 2  # |L| = 2n + 3, so this recovers the peptide length
 
-    # Total peptide mass (the full spectrum includes mass M, which = last prefix mass)
-    M = masses[-1]
+    # The b-ion and y-ion masses (in no particular order). Each is an unknown
+    # residue-weight sum plus an unknown constant offset (w1 for b-ions, w2 for
+    # y-ions): b_i = w(prefix_i) + w1, y_j = w(suffix_j) + w2. Either way,
+    # *consecutive* ions in a chain differ by exactly one residue's mass, so the
+    # offsets cancel out and we can recover the peptide from mass differences.
+    masses = sorted(set(nums[1:]))
 
-    # Extract prefix masses: a mass w is a prefix mass if (M - w) also appears
-    # (because M - prefix_w = corresponding suffix_w).
-    mass_set = set(round(m, 5) for m in masses)
+    # Spectral graph: edge u -> v (u < v) labelled with the amino acid whose
+    # mass equals v - u (within tolerance).
+    edges = {m: [] for m in masses}
+    for i, u in enumerate(masses):
+        for v in masses[i + 1:]:
+            aa = closest_aa(v - u)
+            if aa:
+                edges[u].append((v, aa))
 
-    prefix_masses = set()
-    for m in masses:
-        complement = round(M - m, 5)
-        if complement in mass_set:
-            prefix_masses.add(round(m, 5))
+    # The b-ion chain b_0 < b_1 < ... < b_n (b_0 = w1, the smallest b-ion mass)
+    # is a path of exactly n edges whose labels spell the peptide in order. The
+    # smallest mass overall is min(w1, w2); Rosalind's datasets are built so it
+    # is w1, i.e. the b-ion chain starts at the smallest mass in the spectrum.
+    path = []
 
-    prefix_masses = sorted(prefix_masses)
+    def search(node, depth):
+        if depth == n:
+            return True
+        for nxt, aa in edges[node]:
+            path.append(aa)
+            if search(nxt, depth + 1):
+                return True
+            path.pop()
+        return False
 
-    # Consecutive differences of sorted prefix masses give amino acid residue masses
-    protein = []
-    for i in range(1, len(prefix_masses)):
-        diff = prefix_masses[i] - prefix_masses[i-1]
-        aa = closest_aa(diff)
-        if aa:
-            protein.append(aa)
-
-    print(''.join(protein))
+    search(masses[0], 0)
+    print(''.join(path))
 
 if __name__ == '__main__':
     import io, contextlib

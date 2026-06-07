@@ -1,2 +1,3 @@
 rosalind-inputs/*/*.txt
 rosalind-outputs/*/*.txt
+__pycache__/

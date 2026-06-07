@@ -1,19 +1,18 @@
 # Finding Disjoint Motifs in a Gene (ITWV)
 # Rosalind problem: https://rosalind.info/problems/itwv/
 #
-# Problem: Given strings t and u and a longer string s, determine whether t and
-# u can be found as disjoint subsequences of s (each character of s can be used
-# in at most one of t or u). Output a matrix: row i, col j = 1 if the i-th
-# string and j-th string from input can be found as disjoint subsequences, 0 otherwise.
+# Problem: Given a string s and a collection of patterns, output a matrix where
+# entry (i, j) is 1 iff there is SOME SUBSTRING of s that is an interleaving
+# (shuffle) of pattern i and pattern j as disjoint subsequences -- i.e. a
+# contiguous window of s of length len(t) + len(u) whose characters can be
+# partitioned, in order, into t and u using every character of the window.
 #
-# Algorithm: 3D DP.
-#   dp[i][j] = 1 iff we can match the first i chars of t and first j chars of u
-#   using some prefix of s, with no overlap.
-#   Transition (scanning s left to right):
-#     dp2[i][j] = OR of:
-#       dp[i][j]           (skip s[k] entirely)
-#       dp[i-1][j]         if s[k] == t[i-1] (use s[k] for t)
-#       dp[i][j-1]         if s[k] == u[j-1] (use s[k] for u)
+# Algorithm: for each window w of s of length len(t) + len(u), run the classic
+# "interleaving string" DP:
+#   dp[i][j] = True iff w[:i+j] is an interleaving of t[:i] and u[:j]
+#   dp[i][j] = (dp[i-1][j] and t[i-1] == w[i+j-1]) or
+#              (dp[i][j-1] and u[j-1] == w[i+j-1])
+# The pair matches if dp[len(t)][len(u)] is True for any window.
 
 import os
 import sys
@@ -26,27 +25,26 @@ def get_input():
             return f.read().strip(), path.replace('rosalind-inputs', 'rosalind-outputs')
     return sys.stdin.read().strip(), None
 
-def can_interleave(s, t, u):
-    """Check if t and u can be embedded as disjoint subsequences of s."""
+def is_interleaving(w, t, u):
+    """Check if w (with len(w) == len(t) + len(u)) is an interleaving of t and u."""
     lt, lu = len(t), len(u)
-    # dp[i][j] = True if we can embed t[0..i-1] and u[0..j-1] using some prefix of s
     dp = [[False] * (lu + 1) for _ in range(lt + 1)]
     dp[0][0] = True
-
-    for ch in s:
-        # Process in reverse to avoid using s[k] twice in the same step
-        new_dp = [row[:] for row in dp]
-        for i in range(lt + 1):
-            for j in range(lu + 1):
-                if not dp[i][j]:
-                    continue
-                if i < lt and ch == t[i]:
-                    new_dp[i+1][j] = True
-                if j < lu and ch == u[j]:
-                    new_dp[i][j+1] = True
-        dp = new_dp
-
+    for i in range(lt + 1):
+        for j in range(lu + 1):
+            if i == 0 and j == 0:
+                continue
+            dp[i][j] = (
+                (i > 0 and dp[i-1][j] and t[i-1] == w[i+j-1]) or
+                (j > 0 and dp[i][j-1] and u[j-1] == w[i+j-1])
+            )
     return dp[lt][lu]
+
+def can_interleave(s, t, u):
+    """Check if some substring of s is an interleaving of t and u as disjoint subsequences."""
+    window = len(t) + len(u)
+    return any(is_interleaving(s[k:k+window], t, u)
+               for k in range(len(s) - window + 1))
 
 def solve(data):
     lines = [l.strip() for l in data.splitlines() if l.strip()]
@@ -57,11 +55,7 @@ def solve(data):
     for i in range(n):
         row = []
         for j in range(n):
-            if i == j:
-                # Can the same string be embedded twice as disjoint subsequences?
-                result = can_interleave(s, patterns[i], patterns[j])
-            else:
-                result = can_interleave(s, patterns[i], patterns[j])
+            result = can_interleave(s, patterns[i], patterns[j])
             row.append('1' if result else '0')
         matrix.append(' '.join(row))
     print('\n'.join(matrix))

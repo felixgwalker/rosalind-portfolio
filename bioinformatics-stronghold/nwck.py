@@ -72,6 +72,8 @@ def parse_newick(s):
             while pos < len(s) and s[pos] not in '(),;:':
                 pos += 1
             label = s[label_start:pos].strip()
+            if not label:
+                label = new_node()
             # Skip optional branch length
             if pos < len(s) and s[pos] == ':':
                 pos += 1
